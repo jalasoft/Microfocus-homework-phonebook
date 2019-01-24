@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="contactRepoFactory" class="cz.lastovicka.phonebook.infrastructure.repository.contact.ContactRepositoryFactory"/>
+
+    <bean id="eventBus" class="com.google.common.eventbus.EventBus"/>
+
+    <bean id="applicationService" class="cz.lastovicka.phonebook.application.service.PhoneBookService">
+        <constructor-arg ref="contactRepoFactory"/>
+    </bean>
+
+    <bean id="mainController" class="cz.lastovicka.phonebook.infrastructure.ui.MainController" lazy-init="true">
+        <constructor-arg ref="mainWindow"/>
+        <constructor-arg ref="eventBus"/>
+        <constructor-arg ref="applicationService"/>
+    </bean>
+
+</beans>
