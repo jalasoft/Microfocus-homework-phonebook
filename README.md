@@ -8,6 +8,26 @@ This application allows managing contacts:
 * create new contact
 * remove existing contact
 
+##How to run
+
+**As a client**
+Prerequisities:
+* Java 8 installed. To check, write on command line: `java -version`
+
+* Download file `phonebook.jar` from this repo
+* run `java -jar phonebook.jar`
+
+
+**As a developer**
+Prerequisities: 
+* Maven installed. To check, write on command line: `mvn --version`
+* Java 8 installed. To check, write on command line: `java -version`
+
+* Clone this repository from GitHub
+* run `mvn clean install` in the root directory containing `pom.xml`
+* run `java -jar phonebook.jar`
+
+
 ## Design consideration
 
 ### persistence
@@ -68,4 +88,37 @@ All the UI infrastructure accesses backend only via this class.
 with XML file as a storage.
 
 
+##Application
+
+Phone book reads and stores data in following format:
+
+```
+ <contacts>
+   <contact>
+     <id>00000000-0000-0000-0000-000000000001</id>
+     <name>John Lennon</name>
+     <number>+222 111 111111</number>
+     <number>+989 222 222222</number>
+     <number>+333 313 131313</number>
+   </contact>
+   <contact>
+     <id>00000000-0000-0000-0000-000000000002</id>
+     <name>Paul McCartney</name>
+     <number>+888 333 333333</number>
+     <number>+444 444 444444</number>
+   </contact>
+   <contact>
+     <id>00000000-0000-0000-0000-000000000004</id>
+     <name>Ringo Starr</name>
+     <number>+343 777 777777</number>
+   </contact>
+   <contact>
+     <id>00000000-0000-0000-0000-000000000003</id>
+     <name>George Harrison</name>
+     <number>+001 555 555555</number>
+   </contact>
+ </contacts>
+ ```
+ 
+ This example implies that a contact can contain one or more phone numbers.
  
