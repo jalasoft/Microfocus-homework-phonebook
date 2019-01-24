@@ -11,18 +11,16 @@ This application allows managing contacts:
 ##How to run
 
 **As a client**
-Prerequisities:
-* Java 8 installed. To check, write on command line: `java -version`
 
+* Java 8 must be installed. To check, write on command line: `java -version`
 * Download file `phonebook.jar` from this repo
 * run `java -jar phonebook.jar`
 
 
 **As a developer**
-Prerequisities: 
-* Maven installed. To check, write on command line: `mvn --version`
-* Java 8 installed. To check, write on command line: `java -version`
 
+* Maven must be installed. To check, write on command line: `mvn --version`
+* Java 8 must be installed. To check, write on command line: `java -version`
 * Clone this repository from GitHub
 * run `mvn clean install` in the root directory containing `pom.xml`
 * run `java -jar phonebook.jar`
@@ -121,4 +119,44 @@ Phone book reads and stores data in following format:
  ```
  
  This example implies that a contact can contain one or more phone numbers.
+ 
+ 
+ 
+ ##Testing
+ 
+ There are two groups of tests:
+ 
+ * unit tests
+ * function tests
+ 
+ ### Unit Tests
+ I developed uni tests of XmlContactRepository (stored in `src/test/java/.../unit/XmlContactRepositoryTest`). I needed
+ to develop these tests during development because I wanted to make sure it works and it is
+ very straightforward and easy to by sure this part is working well.
+ 
+ ### Functional Tests
+ I developed functional tests that test PhoneBookService as a whole. It means that these tests
+ test the whole logic of the application. This whole backend (stored in `src/test/java/.../functional/PhoneBookServiceTest`).
+ 
+ I focused on several classic use cases like:
+ 
+ * open existing phone book
+ * add new contacts
+ * find contacts by name
+ 
+ OR 
+ 
+ * open existing phone book
+ * read contacts
+ * add new contacts
+ 
+ OR 
+ 
+ * create new phone book
+ * create new contacts
+ * read these contacts
+ 
+ 
+ 
+      
  
