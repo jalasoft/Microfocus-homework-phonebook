@@ -26,11 +26,10 @@ import java.util.stream.Collectors;
  * @author Jan Lastovicka
  * @since 2019-01-24
  */
-final class ContactDetailController {
+final class ContactDetailController extends UIFragmentController {
 
     private static final String FXML_RESOURCE = "contact_detail.fxml";
 
-    private final EventBus eventBus;
     private final PhoneBookService service;
 
     @FXML
@@ -46,11 +45,14 @@ final class ContactDetailController {
     private GridPane detailPane;
 
     ContactDetailController(EventBus eventBus, PhoneBookService service) {
-        this.eventBus = eventBus;
+        super(eventBus);
+
         this.service = service;
     }
 
     void initialize() {
+        super.initialize();
+
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(ContactDetailController.class.getClassLoader().getResource(FXML_RESOURCE));
         loader.setController(this);
@@ -65,7 +67,6 @@ final class ContactDetailController {
         surnameTxt.setEditable(false);
         phonesTxt.setEditable(false);
         phonesTxt.setPrefRowCount(5);
-        eventBus.register(this);
     }
 
     @Subscribe
@@ -83,7 +84,7 @@ final class ContactDetailController {
             showContact(contact);
         } catch (PhoneBookException exc) {
             exc.printStackTrace();
-            eventBus.post(LogEvent.error(exc.getMessage()));
+            postEvent(LogEvent.error(exc.getMessage()));
         }
     }
 

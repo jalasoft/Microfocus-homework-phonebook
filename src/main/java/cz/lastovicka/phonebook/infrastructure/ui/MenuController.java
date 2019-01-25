@@ -18,10 +18,9 @@ import javafx.scene.control.SeparatorMenuItem;
  * @author Jan Lastovicka
  * @since 2019-01-24
  */
-final class MenuController {
+final class MenuController extends UIFragmentController {
 
     private final MenuBar menuBar;
-    private final EventBus eventBus;
 
     private MenuItem newItem;
     private MenuItem openItem;
@@ -29,11 +28,14 @@ final class MenuController {
     private MenuItem exitItem;
 
     MenuController(EventBus eventBus, MenuBar menuBar) {
-        this.eventBus = eventBus;
+        super(eventBus);
+
         this.menuBar = menuBar;
     }
 
     void initialize() {
+        super.initialize();
+
         newItem = newFile();
         openItem = open();
         closeItem = close();
@@ -52,8 +54,6 @@ final class MenuController {
         menuBar.getMenus().addAll(
                 menu
         );
-
-        eventBus.register(this);
     }
 
     @Subscribe
@@ -79,14 +79,14 @@ final class MenuController {
 
     private MenuItem newFile() {
         MenuItem item = new MenuItem("New...");
-        item.setOnAction(e -> eventBus.post(new NewPhoneBookEvent()));
+        item.setOnAction(e -> postEvent(new NewPhoneBookEvent()));
 
         return item;
     }
 
     private MenuItem open() {
         MenuItem item = new MenuItem("Open...");
-        item.setOnAction(e -> eventBus.post(new OpenPhoneBookEvent()));
+        item.setOnAction(e -> postEvent(new OpenPhoneBookEvent()));
 
         return item;
     }
@@ -94,14 +94,14 @@ final class MenuController {
     private MenuItem close() {
         MenuItem item = new MenuItem("Close");
         item.setDisable(true);
-        item.setOnAction(e -> eventBus.post(new ClosePhoneBookEvent()));
+        item.setOnAction(e -> postEvent(new ClosePhoneBookEvent()));
 
         return item;
     }
 
     private MenuItem exit() {
         MenuItem item = new MenuItem("Exit");
-        item.setOnAction(e -> eventBus.post(new ExitAppEvent()));
+        item.setOnAction(e -> postEvent(new ExitAppEvent()));
 
         return item;
     }

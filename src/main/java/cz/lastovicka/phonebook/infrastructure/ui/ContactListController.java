@@ -10,6 +10,9 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.ConcurrentLinkedDeque;
 
 /**
  * This controller represents a list view of all the
@@ -18,29 +21,30 @@ import java.util.Collection;
  * @author Jan Lastovicka
  * @since 2019-01-24
  */
-final class ContactListController {
+final class ContactListController extends UIFragmentController {
 
-    private final EventBus eventBus;
     private final PhoneBookService service;
     private final ListView<ContactDescription> contactList;
 
-
     ContactListController(EventBus eventBus, PhoneBookService service, ListView<ContactDescription> contactList) {
-        this.eventBus = eventBus;
+        super(eventBus);
+
         this.service = service;
         this.contactList = contactList;
     }
 
     void initialize() {
+        super.initialize();
 
         this.contactList.setCellFactory(p -> new ContactDescriptionListCell());
         this.contactList.getSelectionModel().selectedItemProperty().addListener((ob, o, n) -> {
             if (n == null) {
                 return;
             }
-            eventBus.post(new ContactSelectedEvent(n));
+            postEvent(new ContactSelectedEvent(n));
         });
-        this.eventBus.register(this);
+
+        unselect();
     }
 
     ContactDescription selectedContact() {
@@ -54,7 +58,7 @@ final class ContactListController {
             Collection<ContactDescription> contacts = service.allContactDescriptions();
             this.contactList.getItems().addAll(contacts);
         } catch (PhoneBookException exc) {
-            this.eventBus.post(LogEvent.error(exc.getMessage()));
+            postEvent(LogEvent.error(exc.getMessage()));
         }
     }
 
@@ -71,6 +75,38 @@ final class ContactListController {
     @Subscribe
     void onContactDeleted(ContactDeletedEvent event) {
         this.contactList.getItems().remove(event.contact());
+    }
+
+    @Subscribe
+    void onContactSearched(SearchContactEvent event) {
+        selectContactIfMatches(event.text());
+    }
+
+    private void selectContactIfMatches(String text) {
+        if (text.isEmpty()) {
+            unselect();
+            return;
+        }
+
+        List<ContactDescription> contacts = contactList.getItems();
+        Optional<ContactDescription> maybeDescription = contacts.
+                stream()
+                .filter(c -> c.name().fullName().toLowerCase().contains(text.toLowerCase()))
+                .findFirst();
+
+        if (!maybeDescription.isPresent()) {
+            unselect();
+            return;
+        }
+
+        ContactDescription contact = maybeDescription.get();
+
+        postEvent(new ContactSelectedEvent(contact));
+        contactList.getSelectionModel().select(contact);
+    }
+
+    private void unselect() {
+        this.contactList.getSelectionModel().select(-1);
     }
 
     //----------------------------------------------------------------------------------

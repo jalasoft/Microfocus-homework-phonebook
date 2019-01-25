@@ -58,6 +58,9 @@ public final class MainController {
     @FXML
     private Label statusLbl;
 
+    @FXML
+    private TextField searchTxt;
+
     //---------------------------------------------------------------
     //
     //---------------------------------------------------------------
@@ -72,6 +75,7 @@ public final class MainController {
     private ToolbarController toolbarController;
     private StatusController statusController;
     private NewContactDialogController newContactController;
+    private SearchContactController searchContactController;
 
     public MainController(Stage mainWindow, EventBus eventBus, PhoneBookService service) {
         this.mainWindow = mainWindow;
@@ -100,6 +104,9 @@ public final class MainController {
 
         this.newContactController = new NewContactDialogController();
         this.newContactController.initialize();
+
+        this.searchContactController = new SearchContactController(eventBus, searchTxt);
+        this.searchContactController.initialize();
 
         this.eventBus.register(this);
     }

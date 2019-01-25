@@ -4,8 +4,10 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -13,7 +15,16 @@
    <center>
       <SplitPane fx:id="splitPane" BorderPane.alignment="CENTER">
          <items>
-            <ListView fx:id="contactList" />
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                     <children>
+                        <TextField fx:id="searchTxt" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
+                  <ListView fx:id="contactList" />
+               </children>
+            </VBox>
          </items>
       </SplitPane>
    </center>
