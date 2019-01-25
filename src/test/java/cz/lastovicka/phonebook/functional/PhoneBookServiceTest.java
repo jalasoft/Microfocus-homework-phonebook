@@ -26,6 +26,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.empty;
 import static org.hamcrest.Matchers.is;
 import static org.testng.Assert.*;
+import static java.util.Arrays.*;
 
 /**
  * @author Jan Lastovicka
@@ -66,9 +67,9 @@ public class PhoneBookServiceTest {
         assertThat(noDescriptions, is(empty()));
 
 
-        service.addContact(ContactName.fromFullName("Josef Svejk"), PhoneNumber.parse("+420 456 243243"));
-        service.addContact(ContactName.fromFullName("Jiri Novak"), PhoneNumber.parse("+420 321 777888"));
-        service.addContact(ContactName.fromFullName("Antonin Ponozka"), PhoneNumber.parse("+420 689 576908"));
+        service.addContact(ContactName.fromFullName("Josef Svejk"), asList(PhoneNumber.parse("+420 456 243243")));
+        service.addContact(ContactName.fromFullName("Jiri Novak"), asList(PhoneNumber.parse("+420 321 777888")));
+        service.addContact(ContactName.fromFullName("Antonin Ponozka"), asList(PhoneNumber.parse("+420 689 576908")));
 
         Collection<ContactDescription> descriptions = service.allContactDescriptions();
         assertNotNull(descriptions);
@@ -95,7 +96,7 @@ public class PhoneBookServiceTest {
         XmlFileContactsSource source = XmlFileContactsSource.newSource(xmlFile, CREATE_IF_NOT_EXISTS);
 
         service.openPhoneBook(source);
-        service.addContact(ContactName.fromFullName("Antonin Ponozka"), PhoneNumber.parse("+420 689 576908"));
+        service.addContact(ContactName.fromFullName("Antonin Ponozka"), asList(PhoneNumber.parse("+420 689 576908")));
         service.closePhoneBook();
 
         service.openPhoneBook(source);
@@ -134,7 +135,7 @@ public class PhoneBookServiceTest {
             assertNotNull(shoudBeEmpty);
             assertTrue(shoudBeEmpty.isEmpty());
 
-            service.addContact(ContactName.fromFullName("Dave Gahan"), PhoneNumber.parse("+001 354 287756"));
+            service.addContact(ContactName.fromFullName("Dave Gahan"), asList(PhoneNumber.parse("+001 354 287756")));
 
             Collection<Contact> found = service.contactByName(ContactName.fromFullName("Dave Gahan"));
             assertNotNull(found);

@@ -274,6 +274,9 @@ is that if someone modifies the file externally, the application can quickly ref
  There is no end-to-end test, I found some libraries how to test a JavaFX application as a whole.
  For example RobotFramework seems to be an appropriate one, but I did not have enough time to play
  with it. 
+
+ More negative tests like adding new null contacts, etc.
+ 
  
  ### Reporting
  TestNG generated HTML formatted report. This report could be further deployed etc. For now

@@ -1,6 +1,6 @@
 package cz.lastovicka.phonebook.infrastructure.ui.event;
 
-import lombok.EqualsAndHashCode;
+import com.google.common.base.Objects;
 
 /**
  *
@@ -9,7 +9,6 @@ import lombok.EqualsAndHashCode;
  * @author Jan Lastovicka
  * @since 2019-01-24
  */
-@EqualsAndHashCode
 public final class LogEvent {
 
     /**
@@ -58,5 +57,19 @@ public final class LogEvent {
 
     public String severity() {
         return severity;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LogEvent logEvent = (LogEvent) o;
+        return Objects.equal(severity, logEvent.severity) &&
+                Objects.equal(message, logEvent.message);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(severity, message);
     }
 }

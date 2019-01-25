@@ -6,8 +6,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
-import lombok.Builder;
-import lombok.Getter;
 
 import java.io.IOException;
 import java.util.*;
@@ -72,11 +70,10 @@ final class NewContactDialogController {
 
             Set<String> phones = new HashSet<>(Arrays.asList(phonesTxt.getText().split("\n")));
 
-            ContactData data = ContactData.builder()
-                    .firstName(nameTxt.getText())
-                    .lastName(surnameTxt.getText())
-                    .phoneNumbers(new HashSet<>(phones))
-                    .build();
+            ContactData data = new ContactData(
+                    nameTxt.getText(),
+                    surnameTxt.getText(),
+                    new HashSet<>(phones));
 
             cleanUpFields();
             dialog.hide();
@@ -155,12 +152,28 @@ final class NewContactDialogController {
     //CONTAINER OF INSERTED FIELDS
     //------------------------------------------------------------
 
-    @Builder
-    @Getter
     final static class ContactData {
 
         private final String firstName;
         private final String lastName;
         private final Set<String> phoneNumbers;
+
+        ContactData(String firstName, String lastName, Set<String> phoneNumbers) {
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.phoneNumbers = phoneNumbers;
+        }
+
+        public String getFirstName() {
+            return firstName;
+        }
+
+        public String getLastName() {
+            return lastName;
+        }
+
+        public Set<String> getPhoneNumbers() {
+            return phoneNumbers;
+        }
     }
 }

@@ -1,7 +1,7 @@
 package cz.lastovicka.phonebook.infrastructure.ui.event;
 
+import com.google.common.base.Objects;
 import cz.lastovicka.phonebook.domain.model.contact.ContactDescription;
-import lombok.EqualsAndHashCode;
 
 /**
  * An event that is triggered when an existing contact has been deleted.
@@ -9,7 +9,6 @@ import lombok.EqualsAndHashCode;
  * @author Jan Lastovicka
  * @since 2019-01-24
  */
-@EqualsAndHashCode
 public final class ContactDeletedEvent {
 
     private final ContactDescription contact;
@@ -32,5 +31,18 @@ public final class ContactDeletedEvent {
      */
     public ContactDescription contact() {
         return contact;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ContactDeletedEvent that = (ContactDeletedEvent) o;
+        return Objects.equal(contact, that.contact);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(contact);
     }
 }
