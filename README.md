@@ -10,7 +10,7 @@ This application allows managing contacts:
 * create new contact
 * remove existing contact
 
-##Application
+## Application
 
 Phone book is a desktop application, written in Java language, using JavaFX
 library as UI framework, storing contacts into external XML file.
@@ -42,13 +42,13 @@ Now the user can perform following operation:
 * delete an existing contact
 * search an existing contact
 
-####View detail
+#### View detail
 
 To see a detail of a contact, the user can simply select a name of a person
 from the list on the left, and a detail of the person's contact is displayed
 in the detail view on the right.
 
-####New contact
+#### New contact
 
 The toolbar provides a button for adding a new contact (plus sign). By clicking
 on it, a new dialog appears:
@@ -65,13 +65,13 @@ is not valid, it is not allowed to save the contact. These are the rules:
 If all the fields are valid, a new contact is saved in XML file and visible in the list of
 all contacts.
 
-####Delete contact
+#### Delete contact
 
 For deleting an existing contact, the user can use a toolbar button (dustbin). By clicking
 on it, the selected contact disappears from the list of contact as well as from
 source XML file.
 
-####Search contact
+#### Search contact
 
 The PhoneBook application allows searching for contacts by typing in the text field
 above list of contact. As user types, the application tries to find the first contact
@@ -79,7 +79,7 @@ that contains the inserted text and select its detail.
 
 ![searchng](images/searching.png)
 
-####XML file
+#### XML file
 
 To play with the application, I prepared an example XML file with several contacts, saved in
 the root directory of the repo - **contacts.xml**.
@@ -117,7 +117,7 @@ Phone book reads and stores data in XML file in the following format:
 As user works with contacts (adds/removes), the XML file is updated automatically. 
  
  
-##How to run
+## How to run
 
 **As a client**
 
@@ -220,7 +220,7 @@ been introduced that caches the contacts and reloads them from file in cas the f
 is that if someone modifies the file externally, the application can quickly reflect this information.
 
 
- ##Testing
+ ## Testing
  
  As a testing framework I chose **TestNG** which is my favourite framework and I have a lot
  of experience with it. There are two groups of tests:
