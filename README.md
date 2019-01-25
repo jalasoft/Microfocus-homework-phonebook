@@ -15,6 +15,16 @@ This application allows managing contacts:
 Phone book is a desktop application, written in Java language, using JavaFX
 library as UI framework, storing contacts into external XML file.
 
+Basic flow is as follow:
+
+* User opens a phone book
+* User adds/removes contacts
+* User closes the phone book
+* User creates a new phone book
+* User adds/removes contacs 
+* ...
+
+
 When the application is launched, following window appears: 
 
 ![main window](images/theAppEmpty.png)
@@ -29,13 +39,13 @@ This can be accomplished by menu:
 ![menu](images/menu.png)
 
 By selecting either **New...** or **Open...**. In both cases, a common file dialog
-opens to choose an existing file to define a new file. If the user chooses an
+opens to choose an existing file or to define a new file. If the user chooses an
 existing file, the application gets populated: 
 
 
 ![main window](images/theApp.png)
 
-Now the user can perform following operation:
+Now the user can perform following operations:
 
 * view contact detail
 * create a new contact
