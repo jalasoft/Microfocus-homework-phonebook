@@ -132,8 +132,8 @@ As user works with contacts (adds/removes), the XML file is updated automaticall
 **As a client**
 
 * Java 8 must be installed. To check, write on command line: `java -version`
-* Download file `phonebook.jar` from this repo
-* run `java -jar phonebook.jar`
+* Download file `PhoneBook-1.0.jar` from this repo
+* run `java -jar PhoneBook-1.0.jar`
 
 
 **As a developer**
@@ -142,7 +142,7 @@ As user works with contacts (adds/removes), the XML file is updated automaticall
 * Java 8 must be installed. To check, write on command line: `java -version`
 * Clone this repository from GitHub
 * run `mvn clean install` in the root directory containing `pom.xml`
-* run `java -jar phonebook.jar`
+* run `java -jar PhoneBook-1.0.jar`
 
 to run tests
 * run `mvn clean test` in the root directory of the repo.

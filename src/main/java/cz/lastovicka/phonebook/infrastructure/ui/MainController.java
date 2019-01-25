@@ -159,6 +159,10 @@ public final class MainController {
 
         try {
             ContactDescription contact = contactListController.selectedContact();
+            if (contact == null) {
+                return;
+            }
+
             service.removeContact(contact.id());
             eventBus.post(new ContactDeletedEvent(contact));
         } catch (PhoneBookException exc) {
